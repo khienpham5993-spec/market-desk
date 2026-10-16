@@ -15,9 +15,9 @@
 <div class="wrap">
 <header class="top"><div class="brand">MARKET DESK <small>BTC · ETH · GOLD — phân tích, không đặt lệnh</small></div><div class="live" id="connection"><i class="dot"></i> ĐANG KẾT NỐI</div></header>
 <section class="cards">
-<button class="asset active" data-asset="BTC"><div class="asset-head"><span class="asset-name">₿ BTC / USDT</span><span>●</span></div><div class="price" id="price-BTC">Đang tải…</div><div class="change" id="change-BTC">MEXC Perpetual</div></button>
-<button class="asset" data-asset="ETH"><div class="asset-head"><span class="asset-name">◆ ETH / USDT</span><span>●</span></div><div class="price" id="price-ETH">Đang tải…</div><div class="change" id="change-ETH">MEXC Perpetual</div></button>
-<button class="asset gold" data-asset="GOLD"><div class="asset-head"><span class="asset-name">🟡 GOLD / XAU</span><span>●</span></div><div class="price" id="price-GOLD">Đang tải…</div><div class="change" id="change-GOLD">MEXC Perpetual</div></button>
+<button class="asset active" data-asset="BTC"><div class="asset-head"><span class="asset-name">₿ BTC / USDT</span><span>●</span></div><div class="price" id="price-BTC">Đang tải…</div><div class="change" id="change-BTC">Dữ liệu tham chiếu</div></button>
+<button class="asset" data-asset="ETH"><div class="asset-head"><span class="asset-name">◆ ETH / USDT</span><span>●</span></div><div class="price" id="price-ETH">Đang tải…</div><div class="change" id="change-ETH">Dữ liệu tham chiếu</div></button>
+<button class="asset gold" data-asset="GOLD"><div class="asset-head"><span class="asset-name">🟡 GOLD / XAU</span><span>●</span></div><div class="price" id="price-GOLD">Đang tải…</div><div class="change" id="change-GOLD">Dữ liệu tham chiếu</div></button>
 </section>
 <div class="layout">
 <section class="panel">
@@ -38,7 +38,7 @@
 </div>
 <div class="panel-title" style="margin-top:16px">BẢN ĐỒ VÙNG GIÁ <span class="sub" id="zoneTf">M15</span></div>
 <table class="zones"><thead><tr><th>VÙNG</th><th>GIÁ</th><th>TRẠNG THÁI</th></tr></thead><tbody id="zoneRows"><tr><td colspan="3" class="loading">Đang tính vùng giá…</td></tr></tbody></table>
-<div class="note">Vùng swing là đỉnh/đáy trong dữ liệu nến gần nhất. Pivot ngày được tính từ nến ngày trước. Không phải dữ liệu sổ lệnh hoặc bản đồ thanh lý toàn thị trường.</div>
+<div class="note">Vùng swing là đỉnh/đáy trong dữ liệu nến gần nhất. Pivot ngày được tính từ nến ngày trước. Đây không phải dữ liệu sổ lệnh hoặc bản đồ thanh lý. GOLD sử dụng PAXG/USDT làm giá tham chiếu, không đại diện tuyệt đối cho hợp đồng vàng trên MEXC.</div>
 </section>
 <section class="panel wide">
 <div class="panel-title">KỊCH BẢN THEO DÕI <span class="sub">Tự cập nhật theo dữ liệu nến</span></div>
@@ -46,20 +46,20 @@
 <div class="metric"><div class="label">KỊCH BẢN TĂNG</div><div class="val" id="bullCase">Chờ dữ liệu</div><div class="note" id="bullDetail">Theo dõi vùng hỗ trợ và phản ứng giá.</div></div>
 <div class="metric"><div class="label">KỊCH BẢN GIẢM</div><div class="val" id="bearCase">Chờ dữ liệu</div><div class="note" id="bearDetail">Theo dõi vùng kháng cự và phản ứng giá.</div></div>
 </div>
-<div class="note">Nguồn: API công khai MEXC Futures, nếu trình duyệt/mạng cho phép truy cập. Chỉ báo được tính trong trình duyệt. Không có API key, không đọc tài khoản, không gửi lệnh giao dịch.</div>
+<div class="note">Nguồn: API công khai Binance Spot. BTC/ETH là giá spot tham chiếu; GOLD dùng PAXG/USDT (token vàng) làm đại diện, không phải giá chính xác của hợp đồng vàng MEXC. Giá có thể lệch giá khớp trên sàn anh giao dịch. Không có API key, không đọc tài khoản, không gửi lệnh giao dịch.</div>
 </section>
 </div>
 <div class="footer">MARKET DESK · Bản thử nghiệm độc lập · Giá và tín hiệu có thể chậm hoặc lỗi nếu API không khả dụng.</div>
 </div>
 <script>
-const ASSETS={BTC:{symbol:'BTC_USDT',decimals:1},ETH:{symbol:'ETH_USDT',decimals:2},GOLD:{symbol:'XAU_USDT',decimals:2}};
+const ASSETS={BTC:{symbol:'BTCUSDT',decimals:1},ETH:{symbol:'ETHUSDT',decimals:2},GOLD:{symbol:'PAXGUSDT',decimals:2}};
 let asset='BTC',tf='Min15',series=[],daily=[],ticker={},refreshTimer=null;document.addEventListener('DOMContentLoaded',()=>{const el=document.getElementById('connection');if(el)el.textContent='ĐANG KHỞI ĐỘNG';});
 const $=id=>document.getElementById(id);
 const fmt=(v,d=2)=>Number.isFinite(Number(v))?Number(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}):'—';
 const tfName={'Min5':'M5','Min15':'M15','Min60':'H1','Hour4':'H4','Day1':'D1','Week1':'W1'};
 function fetchWithTimeout(url,ms=10000){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),ms);return fetch(url,{cache:'no-store',signal:controller.signal}).finally(()=>clearTimeout(timer))}
-function apiKline(sym,interval,limit=300){const now=Math.floor(Date.now()/1000);const secs={'Min5':300,'Min15':900,'Min60':3600,'Hour4':14400,'Day1':86400,'Week1':604800}[interval]||900;return fetchWithTimeout(`https://contract.mexc.com/api/v1/contract/kline/${sym}?interval=${interval}&start=${now-secs*limit}&end=${now}`).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(j=>{if(!j.success||!j.data)throw Error(j.msg||'Không có dữ liệu');const d=j.data;let out=[];if(Array.isArray(d.time)){for(let i=0;i<d.time.length;i++)out.push({time:+d.time[i],open:+d.open[i],high:+d.high[i],low:+d.low[i],close:+d.close[i],vol:+(d.vol?.[i]||0)})}else if(Array.isArray(d)){out=d.map(x=>({time:+x[0],open:+x[1],high:+x[2],low:+x[3],close:+x[4],vol:+(x[5]||0)}))}return out.filter(x=>x.close>0&&x.high>0&&x.low>0)})}
-function apiTicker(sym){return fetchWithTimeout(`https://contract.mexc.com/api/v1/contract/ticker?symbol=${sym}`).then(r=>r.json()).then(j=>{let d=Array.isArray(j.data)?j.data[0]:j.data;if(!j.success||!d)throw Error('Ticker unavailable');return {last:+(d.lastPrice||d.fairPrice||d.indexPrice),change:+(d.riseFallRate||0)*100}})}
+function apiKline(sym,interval,limit=300){const map={'Min5':'5m','Min15':'15m','Min60':'1h','Hour4':'4h','Day1':'1d','Week1':'1w'};const iv=map[interval]||'15m';return fetchWithTimeout(`https://api.binance.com/api/v3/klines?symbol=${sym}&interval=${iv}&limit=${Math.min(limit,1000)}`).then(r=>{if(!r.ok)throw Error('Binance HTTP '+r.status);return r.json()}).then(rows=>{if(!Array.isArray(rows))throw Error('Dữ liệu nến không hợp lệ');return rows.map(x=>({time:+x[0]/1000,open:+x[1],high:+x[2],low:+x[3],close:+x[4],vol:+x[5]})).filter(x=>x.close>0&&x.high>0&&x.low>0)})}
+function apiTicker(sym){return fetchWithTimeout(`https://api.binance.com/api/v3/ticker/24hr?symbol=${sym}`).then(r=>{if(!r.ok)throw Error('Binance HTTP '+r.status);return r.json()}).then(d=>{if(!d||!d.lastPrice)throw Error('Ticker unavailable');return {last:+d.lastPrice,change:+d.priceChangePercent}})}
 function ema(vals,period){if(vals.length<period)return NaN;let k=2/(period+1),e=vals.slice(0,period).reduce((a,b)=>a+b,0)/period;for(let i=period;i<vals.length;i++)e=vals[i]*k+e*(1-k);return e}
 function priceFmt(v){return fmt(v,asset==='BTC'?1:asset==='ETH'?2:2)}
 function pivotFromDaily(a){if(a.length<2)return NaN;let p=a[a.length-2];return (p.high+p.low+p.close)/3}
@@ -83,7 +83,7 @@ setText('summary',`${asset}: ${state}. Giá ${priceFmt(last.close)}; EMA60 ${pri
 setText('bullCase',last.close>e60?'Theo dõi tiếp diễn tăng':'Chờ giá phản ứng tại hỗ trợ');setText('bullDetail',`Theo dõi EMA60 ${priceFmt(e60)}, swing low ${priceFmt(swingLow)} và tín hiệu nến xác nhận.`);
 setText('bearCase',last.close<e60?'Theo dõi tiếp diễn giảm':'Chờ phản ứng tại kháng cự');setText('bearDetail',`Theo dõi EMA60 ${priceFmt(e60)}, swing high ${priceFmt(swingHigh)} và dấu hiệu phá vỡ cấu trúc.`);
 setText('lastUpdate','Cập nhật '+new Date().toLocaleTimeString('vi-VN',{hour:'2-digit',minute:'2-digit',second:'2-digit'}))}
-async function loadAsset(){const sym=ASSETS[asset].symbol;setText('connection','ĐANG CẬP NHẬT');try{const results=await Promise.allSettled([apiKline(sym,tf,300),apiKline(sym,'Day1',10),apiTicker(sym)]);if(results[0].status==='rejected')throw results[0].reason;series=results[0].value;daily=results[1].status==='fulfilled'?results[1].value:[];if(results[2].status==='fulfilled'){ticker[asset]=results[2].value;setText('price-'+asset,priceFmt(ticker[asset].last));const ch=ticker[asset].change;setText('change-'+asset,(ch>=0?'+':'')+fmt(ch,2)+'% · MEXC Futures');$('change-'+asset).className='change '+(ch>=0?'up':'down')}if(!series.length)throw Error('API trả về danh sách nến trống');render();setText('connection','LIVE · MEXC');$('connection').style.color='var(--green)';}catch(e){setText('connection','KHÔNG KẾT NỐI');$('connection').style.color='var(--red)';setText('lastUpdate','Lỗi dữ liệu');$('summary').innerHTML='<span class="error">Không lấy được dữ liệu MEXC: '+String(e.message||e)+'. Có thể API bị chặn CORS, mã hợp đồng không khả dụng hoặc mạng không cho phép truy cập. Không hiển thị giá giả lập.</span>';setText('regime','Chưa có dữ liệu');setText('direction','Kiểm tra kết nối hoặc mã hợp đồng '+sym);}}
+async function loadAsset(){const sym=ASSETS[asset].symbol;setText('connection','ĐANG CẬP NHẬT');try{const results=await Promise.allSettled([apiKline(sym,tf,300),apiKline(sym,'Day1',10),apiTicker(sym)]);if(results[0].status==='rejected')throw results[0].reason;series=results[0].value;daily=results[1].status==='fulfilled'?results[1].value:[];if(results[2].status==='fulfilled'){ticker[asset]=results[2].value;setText('price-'+asset,priceFmt(ticker[asset].last));const ch=ticker[asset].change;setText('change-'+asset,(ch>=0?'+':'')+fmt(ch,2)+'% · MEXC Futures');$('change-'+asset).className='change '+(ch>=0?'up':'down')}if(!series.length)throw Error('API trả về danh sách nến trống');render();setText('connection','LIVE · BINANCE');$('connection').style.color='var(--green)';}catch(e){setText('connection','KHÔNG KẾT NỐI');$('connection').style.color='var(--red)';setText('lastUpdate','Lỗi dữ liệu');$('summary').innerHTML='<span class="error">Không lấy được dữ liệu Binance: '+String(e.message||e)+'. Có thể API bị chặn CORS, mã hợp đồng không khả dụng hoặc mạng không cho phép truy cập. Không hiển thị giá giả lập.</span>';setText('regime','Chưa có dữ liệu');setText('direction','Kiểm tra kết nối hoặc mã dữ liệu '+sym);}}
 async function refreshCards(){for(const k of Object.keys(ASSETS)){try{let t=await apiTicker(ASSETS[k].symbol);ticker[k]=t;setText('price-'+k,fmt(t.last,k==='BTC'?1:2));setText('change-'+k,(t.change>=0?'+':'')+fmt(t.change,2)+'% · MEXC');$('change-'+k).className='change '+(t.change>=0?'up':'down')}catch(e){setText('price-'+k,'Chưa có dữ liệu');setText('change-'+k,'Không kết nối được')}}}
 document.querySelectorAll('[data-asset]').forEach(b=>b.addEventListener('click',()=>{asset=b.dataset.asset;document.querySelectorAll('[data-asset]').forEach(x=>x.classList.toggle('active',x===b));loadAsset()}));
 document.querySelectorAll('[data-tf]').forEach(b=>b.addEventListener('click',()=>{tf=b.dataset.tf;document.querySelectorAll('[data-tf]').forEach(x=>x.classList.toggle('active',x===b));loadAsset()}));
