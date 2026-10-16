@@ -67,7 +67,7 @@ function drawChart(data){const c=$('chart'),ctx=c.getContext('2d'),w=c.width,h=c
 const d=data.slice(-90),vals=d.flatMap(x=>[x.high,x.low]),max=Math.max(...vals),min=Math.min(...vals),pad=(max-min)*.09||1,hi=max+pad,lo=min-pad;const y=v=>h-22-(v-lo)/(hi-lo)*(h-42),x=i=>18+i*(w-36)/(d.length-1);
 ctx.strokeStyle='#203147';ctx.lineWidth=1;ctx.font='12px sans-serif';ctx.fillStyle='#91a4bb';
 for(let i=0;i<5;i++){let yy=22+i*(h-44)/4;ctx.beginPath();ctx.moveTo(10,yy);ctx.lineTo(w-10,yy);ctx.stroke();ctx.fillText(fmt(hi-(hi-lo)*i/4,asset==='BTC'?0:2),w-90,yy-4)}
-const closes=d.map(v=>v.close),e60=d.map((v,i)=>ema(closes.slice(0,i+1),Math.min(60,Math.max(2,Math.floor(closes.length*.65))))),e200=d.map((v,i)=>ema(closes.slice(0,i+1),Math.min(200,Math.max(2,Math.floor(closes.length*.9))));
+const closes=d.map(v=>v.close),e60=d.map((v,i)=>ema(closes.slice(0,i+1),Math.min(60,Math.max(2,Math.floor(closes.length*.65))))),e200=d.map((v,i)=>ema(closes.slice(0,i+1),Math.min(200,Math.max(2,Math.floor(closes.length*.9)))));
 for(let i=0;i<d.length;i++){let xx=x(i),o=y(d[i].open),cl=y(d[i].close),hiY=y(d[i].high),loY=y(d[i].low),up=d[i].close>=d[i].open;ctx.strokeStyle=up?'#32d49a':'#ff647c';ctx.fillStyle=ctx.strokeStyle;ctx.beginPath();ctx.moveTo(xx,hiY);ctx.lineTo(xx,loY);ctx.stroke();let bw=Math.max(2,Math.min(7,(w-36)/d.length*.62));ctx.fillRect(xx-bw/2,Math.min(o,cl),bw,Math.max(1,Math.abs(cl-o)))}
 function line(arr,color){ctx.strokeStyle=color;ctx.lineWidth=1.8;ctx.beginPath();let started=false;arr.forEach((v,i)=>{if(!Number.isFinite(v))return;let xx=x(i),yy=y(v);if(!started){ctx.moveTo(xx,yy);started=true}else ctx.lineTo(xx,yy)});ctx.stroke()}
 line(e60,'#f4c95d');line(e200,'#69a9ff')}
