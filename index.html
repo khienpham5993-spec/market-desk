@@ -67,6 +67,55 @@
 </div>
 <div class="alert">Cách dùng khi giao dịch thủ công: (1) H4 xác định bối cảnh; (2) H1 xác định hướng ưu tiên; (3) M15 xác định vùng; (4) M5 chờ tín hiệu và nến phản ứng. Chỉ cân nhắc vào lệnh khi vị trí, tín hiệu và tỷ lệ lợi nhuận/rủi ro hợp lý cùng xuất hiện. Đặt mức vô hiệu hóa trước khi vào; không đuổi giá. Đây là bộ lọc tham khảo, không phải khuyến nghị mua/bán.</div>
 </section>
+
+<section class="panel wide" id="liquidationPanel">
+<div class="panel-title">🔥 VÙNG THANH KHOẢN / LIQUIDATION ƯỚC TÍNH <span class="sub" id="liqUpdated">Chờ dữ liệu M15</span></div>
+<div class="grid2">
+ <div class="metric"><div class="label">CỤM PHÍA TRÊN GIÁ</div><div class="val" id="liqAbove">Đang tính…</div><div class="note" id="liqAboveNote">Đỉnh gần và vùng giá có thể tập trung lệnh dừng.</div></div>
+ <div class="metric"><div class="label">CỤM PHÍA DƯỚI GIÁ</div><div class="val" id="liqBelow">Đang tính…</div><div class="note" id="liqBelowNote">Đáy gần và vùng giá có thể tập trung lệnh dừng.</div></div>
+</div>
+<div class="statusbox"><span class="badge gold" id="liqBadge">ƯỚC TÍNH CẤU TRÚC</span><div class="state" id="liqSignal">Chưa đủ dữ liệu</div><div class="note" id="liqDetail">Bản miễn phí không có bản đồ phân bố thanh lý thực của Coinglass. Dashboard dùng swing high/low từ nến công khai để đánh dấu vùng thanh khoản tiềm năng; không được hiểu là số liệu liquidation đã xác minh.</div></div>
+</section>
+<section class="panel wide" id="calendarPanel">
+<div class="panel-title">🗓️ LỊCH KINH TẾ MỸ <span class="sub">Giờ Việt Nam · nguồn lịch bên ngoài</span></div>
+<div class="alert">Chỉ tập trung vào <b>thời gian công bố</b>, <b>dự báo</b> và hướng phản ứng tham khảo <b>TĂNG / GIẢM</b> cho vàng. Dự báo không phải kết quả thực tế. Với CPI, NFP và quyết định Fed, hướng giá còn phụ thuộc số liệu thực tế so với dự báo và kỳ vọng thị trường.</div>
+<div class="tv-widget-wrap" style="min-height:420px;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:#fff;margin-top:12px">
+ <div class="tradingview-widget-container" style="height:420px;width:100%">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright" style="font-size:10px;padding:4px 8px;color:#555">Lịch kinh tế được cung cấp bởi TradingView</div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+  {"colorTheme":"dark","isTransparent":false,"width":"100%","height":"400","locale":"vi_VN","importanceFilter":"0,1","currencyFilter":"USD"}
+  </script>
+ </div>
+</div>
+<div class="grid2">
+ <div class="metric"><div class="label">USD / LỢI SUẤT MẠNH HƠN KỲ VỌNG</div><div class="val" style="color:var(--red)">VÀNG: THIÊN GIẢM</div><div class="note">Thường gây áp lực lên vàng, nhưng cần xác nhận bằng phản ứng giá.</div></div>
+ <div class="metric"><div class="label">USD / LỢI SUẤT YẾU HƠN KỲ VỌNG</div><div class="val" style="color:var(--green)">VÀNG: THIÊN TĂNG</div><div class="note">Thường hỗ trợ vàng, nhưng không đảm bảo giá sẽ tăng.</div></div>
+</div>
+<div class="note">Nếu lịch không hiển thị trên iPhone, có thể do trình chặn nội dung hoặc nguồn nhúng không cho phép tải. Dashboard không tự bịa giờ/dự báo khi nguồn lịch không tải được. Các giờ trên widget theo cài đặt nguồn; kiểm tra múi giờ trước khi giao dịch.</div>
+</section>
+
+<section class="panel wide">
+<div class="panel-title">CHỈ BÁO PTKT <span class="sub">Tính từ nến Binance · khung M15</span></div>
+<div class="grid2">
+<div class="metric"><div class="label">RSI 14</div><div class="val" id="indRsi">—</div><div class="note" id="indRsiNote">Đang tính…</div></div>
+<div class="metric"><div class="label">MACD 12/26/9</div><div class="val" id="indMacd">—</div><div class="note" id="indMacdNote">Đang tính…</div></div>
+<div class="metric"><div class="label">ATR 14 / BIÊN ĐỘ</div><div class="val" id="indAtr">—</div><div class="note">Đo độ biến động gần đây, không dự báo chắc chắn.</div></div>
+<div class="metric"><div class="label">BOT / TRẠNG THÁI</div><div class="val" id="botStatus">PHÂN TÍCH THỦ CÔNG</div><div class="note" id="botStatusNote">Không kết nối tài khoản MEXC, không đặt lệnh, không quản lý vị thế.</div></div>
+</div>
+</section>
+<section class="panel wide">
+<div class="panel-title">KẾ HOẠCH ENTRY · TP · DCA <span class="sub">Kịch bản tham khảo, cập nhật theo dữ liệu</span></div>
+<div class="grid2">
+<div class="metric"><div class="label">LONG — ENTRY / VÙNG CHỜ</div><div class="val" id="longEntry">—</div><div class="note" id="longEntryNote">Chờ dữ liệu M15.</div></div>
+<div class="metric"><div class="label">LONG — TP1 / TP2</div><div class="val" id="longTp">—</div><div class="note" id="longTpNote">TP tham chiếu theo tỷ lệ R.</div></div>
+<div class="metric"><div class="label">LONG — DCA1 / DCA2</div><div class="val" id="longDca">—</div><div class="note" id="longDcaNote">Không DCA nếu cấu trúc bị vô hiệu hóa.</div></div>
+<div class="metric"><div class="label">SHORT — ENTRY / VÙNG CHỜ</div><div class="val" id="shortEntry">—</div><div class="note" id="shortEntryNote">Chờ dữ liệu M15.</div></div>
+<div class="metric"><div class="label">SHORT — TP1 / TP2</div><div class="val" id="shortTp">—</div><div class="note" id="shortTpNote">TP tham chiếu theo tỷ lệ R.</div></div>
+<div class="metric"><div class="label">SHORT — DCA1 / DCA2</div><div class="val" id="shortDca">—</div><div class="note" id="shortDcaNote">Không DCA nếu cấu trúc bị vô hiệu hóa.</div></div>
+</div>
+<div class="alert">Lưu ý quan trọng: Entry/TP/DCA là các mức tính toán tham khảo từ swing M15 và ATR, không phải lệnh đang mở hay tín hiệu chắc thắng. DCA chỉ là vùng cần đánh giá lại; không tự động cộng vị thế khi giá đi ngược. Nếu nến đóng phá vùng vô hiệu hóa, bỏ kịch bản thay vì tiếp tục DCA. GOLD đang lấy PAXG/USDT làm đại diện nên các mức này có thể lệch đáng kể so với hợp đồng XAU trên MEXC.</div>
+</section>
 </div>
 <div class="footer">MARKET DESK · Công cụ phân tích thủ công · Dữ liệu tham chiếu Binance Spot; GOLD dùng PAXG/USDT, có thể lệch hợp đồng vàng MEXC.</div>
 </div>
@@ -80,6 +129,9 @@ function fetchWithTimeout(url,ms=10000){const controller=new AbortController();c
 function apiKline(sym,interval,limit=300){const map={'Min5':'5m','Min15':'15m','Min60':'1h','Hour4':'4h','Day1':'1d','Week1':'1w'};const iv=map[interval]||'15m';return fetchWithTimeout(`https://api.binance.com/api/v3/klines?symbol=${sym}&interval=${iv}&limit=${Math.min(limit,1000)}`).then(r=>{if(!r.ok)throw Error('Binance HTTP '+r.status);return r.json()}).then(rows=>{if(!Array.isArray(rows))throw Error('Dữ liệu nến không hợp lệ');return rows.map(x=>({time:+x[0]/1000,open:+x[1],high:+x[2],low:+x[3],close:+x[4],vol:+x[5]})).filter(x=>x.close>0&&x.high>0&&x.low>0)})}
 function apiTicker(sym){return fetchWithTimeout(`https://api.binance.com/api/v3/ticker/24hr?symbol=${sym}`).then(r=>{if(!r.ok)throw Error('Binance HTTP '+r.status);return r.json()}).then(d=>{if(!d||!d.lastPrice)throw Error('Ticker unavailable');return {last:+d.lastPrice,change:+d.priceChangePercent}})}
 function ema(vals,period){if(vals.length<period)return NaN;let k=2/(period+1),e=vals.slice(0,period).reduce((a,b)=>a+b,0)/period;for(let i=period;i<vals.length;i++)e=vals[i]*k+e*(1-k);return e}
+function rsi(vals,period=14){if(vals.length<=period)return NaN;let gain=0,loss=0;for(let i=1;i<=period;i++){const d=vals[i]-vals[i-1];if(d>0)gain+=d;else loss-=d}let ag=gain/period,al=loss/period;for(let i=period+1;i<vals.length;i++){const d=vals[i]-vals[i-1];ag=(ag*(period-1)+Math.max(d,0))/period;al=(al*(period-1)+Math.max(-d,0))/period}return al===0?100:100-100/(1+ag/al)}
+function atr(data,period=14){if(data.length<period+1)return NaN;const tr=[];for(let i=1;i<data.length;i++){const c=data[i],p=data[i-1];tr.push(Math.max(c.high-c.low,Math.abs(c.high-p.close),Math.abs(c.low-p.close)))}return tr.slice(-period).reduce((a,b)=>a+b,0)/period}
+function macd(vals){if(vals.length<35)return null;const line=[];for(let i=0;i<vals.length;i++){const a=ema(vals.slice(0,i+1),12),b=ema(vals.slice(0,i+1),26);line.push(Number.isFinite(a)&&Number.isFinite(b)?a-b:NaN)}const valid=line.filter(Number.isFinite),sig=ema(valid,9);return {line:valid.at(-1),signal:sig,hist:valid.at(-1)-sig}}
 function priceFmt(v){return fmt(v,asset==='BTC'?1:asset==='ETH'?2:2)}
 function pivotFromDaily(a){if(a.length<2)return NaN;let p=a[a.length-2];return (p.high+p.low+p.close)/3}
 function setText(id,text){$(id).textContent=text}
@@ -110,7 +162,25 @@ function trendOf(data){
   if(last<e60&&e60<e200)return {label:'GIẢM',bias:-1,detail:`Giá ${priceFmt(last)} dưới EMA60 ${priceFmt(e60)} và EMA200 ${priceFmt(e200)}.`};
   return {label:'TRUNG TÍNH / HỖN HỢP',bias:0,detail:`Giá ${priceFmt(last)} chưa tạo cấu trúc EMA tăng/giảm đồng thuận.`};
 }
+function updateLiquidityProxy(){
+  const d=planSeries.M15||[];
+  if(d.length<25){setText('liqAbove','Chưa đủ dữ liệu');setText('liqBelow','Chưa đủ dữ liệu');setText('liqSignal','Đang chờ nến M15');return;}
+  const recent=d.slice(-25,-1),last=d[d.length-1];
+  const hi=Math.max(...recent.map(x=>x.high)),lo=Math.min(...recent.map(x=>x.low));
+  const atrVal=atr(d,14),pad=Number.isFinite(atrVal)?atrVal*.12:Math.abs(hi-lo)*.03;
+  const above=[hi-pad,hi+pad],below=[lo-pad,lo+pad];
+  setText('liqAbove',`${priceFmt(above[0])} – ${priceFmt(above[1])}`);
+  setText('liqBelow',`${priceFmt(below[0])} – ${priceFmt(below[1])}`);
+  setText('liqAboveNote',`Đỉnh cấu trúc gần: ${priceFmt(hi)} · cách giá hiện tại ${priceFmt(Math.abs(hi-last.close))}.`);
+  setText('liqBelowNote',`Đáy cấu trúc gần: ${priceFmt(lo)} · cách giá hiện tại ${priceFmt(Math.abs(last.close-lo))}.`);
+  const sweptHigh=last.high>hi&&last.close<hi,sweptLow=last.low<lo&&last.close>lo;
+  setText('liqUpdated','Cập nhật theo M15');
+  if(sweptHigh||sweptLow){setText('liqBadge','CÓ DẤU HIỆU QUÉT');setText('liqSignal',sweptHigh?'Có thể vừa quét đỉnh gần':'Có thể vừa quét đáy gần');}
+  else {setText('liqBadge','VÙNG THANH KHOẢN THAM KHẢO');setText('liqSignal',last.close>hi?'Giá đang vượt đỉnh tham chiếu':last.close<lo?'Giá đang dưới đáy tham chiếu':'Theo dõi phản ứng khi giá tiến sát hai vùng');}
+  setText('liqDetail','Đây là vùng ước tính từ swing high/low và ATR của nến Binance, KHÔNG phải Liquidation Map thật, không có khối lượng thanh lý theo giá. Dùng để quan sát sweep/đỉnh đáy; không dùng riêng lẻ để vào lệnh hoặc DCA.');
+}
 function updateManualPlan(){
+  updateLiquidityProxy();
   const m5=planSeries.M5||[],m15=planSeries.M15||[],h1=planSeries.H1||[],h4=planSeries.H4||[];
   if(m5.length<15||m15.length<30||h1.length<30||h4.length<30){
     setText('planH4','Chưa đủ dữ liệu');setText('planH1','Chưa đủ dữ liệu');
@@ -160,6 +230,30 @@ function updateManualPlan(){
     setText('planReason','Chỉ hành động khi có vị trí tốt trên M15 và phản ứng M5 rõ ràng. Nếu giá nằm giữa vùng, bỏ qua giao dịch.');
     setText('planBadge','CHỜ XÁC NHẬN');
   }
+  // PTKT values use the currently selected asset's M15 candles.
+  const closes=m15.map(x=>x.close),r=rsi(closes,14),a=atr(m15,14),mc=macd(closes);
+  setText('indRsi',Number.isFinite(r)?fmt(r,1):'Chưa đủ nến');
+  setText('indRsiNote',!Number.isFinite(r)?'Cần thêm dữ liệu':r>=70?'Vùng cao: tránh đuổi LONG.':r<=30?'Vùng thấp: chờ phản ứng, không tự động bắt đáy.':'Vùng trung tính; kết hợp cấu trúc giá.');
+  setText('indMacd',mc?`${fmt(mc.line,asset==='BTC'?1:2)} / ${fmt(mc.signal,asset==='BTC'?1:2)}`:'Chưa đủ nến');
+  setText('indMacdNote',!mc?'Cần thêm dữ liệu':mc.hist>0?'Histogram dương: động lượng tăng đang chiếm ưu thế.':mc.hist<0?'Histogram âm: động lượng giảm đang chiếm ưu thế.':'Động lượng gần cân bằng.');
+  setText('indAtr',Number.isFinite(a)?priceFmt(a):'Chưa đủ nến');
+  setText('botStatus','PHÂN TÍCH THỦ CÔNG');
+  setText('botStatusNote','Đang đọc dữ liệu công khai Binance; không kết nối MEXC, không gửi lệnh và không biết vị thế thật của tài khoản.');
+  const entryPad=Number.isFinite(a)?a*.25:0,step=Number.isFinite(a)?Math.max(a*.75,(sHigh-sLow)*.25):((sHigh-sLow)*.25);
+  const lEntry=sLow+entryPad, lInvalid=sLow-(Number.isFinite(a)?a*.5:0), lRisk=Math.max(lEntry-lInvalid,Number.isFinite(a)?a*.5:0.000001);
+  const sEntry=sHigh-entryPad, sInvalid=sHigh+(Number.isFinite(a)?a*.5:0), sRisk=Math.max(sInvalid-sEntry,Number.isFinite(a)?a*.5:0.000001);
+  setText('longEntry',`${priceFmt(Math.min(lEntry,sLow+entryPad))} – ${priceFmt(sLow+entryPad)}`);
+  setText('longEntryNote',`Chờ giá phản ứng gần hỗ trợ ${priceFmt(sLow)} và có xác nhận M5. Vô hiệu hóa tham khảo: ${priceFmt(lInvalid)}.`);
+  setText('longTp',`${priceFmt(lEntry+lRisk)} / ${priceFmt(lEntry+lRisk*1.5)}`);
+  setText('longTpNote','TP1 ≈ 1R · TP2 ≈ 1.5R tính từ điểm giữa vùng Entry; cần kiểm tra kháng cự phía trên.');
+  setText('longDca',`${priceFmt(sLow-step)} / ${priceFmt(sLow-step*2)}`);
+  setText('longDcaNote',`Các mốc cấu trúc/biến động để đánh giá lại, không phải lệnh tự động. Nếu đóng nến dưới ${priceFmt(lInvalid)}, bỏ kịch bản LONG.`);
+  setText('shortEntry',`${priceFmt(sHigh-entryPad)} – ${priceFmt(sHigh)}`);
+  setText('shortEntryNote',`Chờ giá phản ứng gần kháng cự ${priceFmt(sHigh)} và có xác nhận M5. Vô hiệu hóa tham khảo: ${priceFmt(sInvalid)}.`);
+  setText('shortTp',`${priceFmt(sEntry-sRisk)} / ${priceFmt(sEntry-sRisk*1.5)}`);
+  setText('shortTpNote','TP1 ≈ 1R · TP2 ≈ 1.5R tính từ điểm giữa vùng Entry; kiểm tra hỗ trợ phía dưới.');
+  setText('shortDca',`${priceFmt(sHigh+step)} / ${priceFmt(sHigh+step*2)}`);
+  setText('shortDcaNote',`Các mốc cấu trúc/biến động để đánh giá lại, không phải lệnh tự động. Nếu đóng nến trên ${priceFmt(sInvalid)}, bỏ kịch bản SHORT.`);
 }
 
 async function loadAsset(){const sym=ASSETS[asset].symbol;setText('connection','ĐANG CẬP NHẬT');try{const results=await Promise.allSettled([apiKline(sym,tf,300),apiKline(sym,'Day1',10),apiTicker(sym),apiKline(sym,'Min5',220),apiKline(sym,'Min15',220),apiKline(sym,'Min60',220),apiKline(sym,'Hour4',220)]);if(results[0].status==='rejected')throw results[0].reason;series=results[0].value;daily=results[1].status==='fulfilled'?results[1].value:[];planSeries={M5:results[3].status==='fulfilled'?results[3].value:[],M15:results[4].status==='fulfilled'?results[4].value:[],H1:results[5].status==='fulfilled'?results[5].value:[],H4:results[6].status==='fulfilled'?results[6].value:[]};if(results[2].status==='fulfilled'){ticker[asset]=results[2].value;setText('price-'+asset,priceFmt(ticker[asset].last));const ch=ticker[asset].change;setText('change-'+asset,(ch>=0?'+':'')+fmt(ch,2)+'% · Binance Spot');$('change-'+asset).className='change '+(ch>=0?'up':'down')}if(!series.length)throw Error('API trả về danh sách nến trống');render();setText('connection','LIVE · BINANCE');$('connection').style.color='var(--green)';}catch(e){setText('connection','KHÔNG KẾT NỐI');$('connection').style.color='var(--red)';setText('lastUpdate','Lỗi dữ liệu');$('summary').innerHTML='<span class="error">Không lấy được dữ liệu Binance: '+String(e.message||e)+'. Có thể API bị chặn CORS, mã hợp đồng không khả dụng hoặc mạng không cho phép truy cập. Không hiển thị giá giả lập.</span>';setText('regime','Chưa có dữ liệu');setText('direction','Kiểm tra kết nối hoặc mã dữ liệu '+sym);}}
